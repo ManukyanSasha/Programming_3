@@ -1,4 +1,5 @@
 var express = require('express');
+var matrix = require('./modules/matrix.js');
 var path = require('path');
 var app = express();
 
@@ -12,3 +13,40 @@ var server = app.listen(app.get('port'), function() {
   var port = server.address().port;
   console.log('Magic happens on port ' + port);
 });
+var LivingCreature = require("./modules/LivingCreature.js");
+var grass = require("./modules/grass.js");
+var eater = require("./modules/eater.js");
+var predator = require("./modules/predator.js");
+var bee = require("./modules/bee.js");
+var flower = require("./modules/bee.js");
+
+
+var time = frameRate(5);
+function frameRate(frameCount){
+  return 1000 / frameCount;
+}
+function draw(){
+  for (var y = 0; y < matrix.length; y++) {
+    for (var x = 0; x < matrix[y].length; x++) {
+        if (matrix[y][x].index == 1) {
+            matrix[y][x].mul();
+        }
+        else if (matrix[y][x].index == 2) {
+            matrix[y][x].eat();
+        }
+        else if(matrix[y][x].index == 3){
+            matrix[y][x].eat();
+        }
+        else if(matrix[y][x].index == 4){
+            matrix[y][x].eat();
+        }
+        else if(matrix[y][x].index == 5){
+            matrix[y][x].move();
+        }
+    }
+} 
+}
+setInterval(draw, time);
+for(var kar = 0; kar<5; kar++){
+console.log(matrix);
+}
