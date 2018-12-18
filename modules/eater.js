@@ -46,7 +46,7 @@ module.exports = class Eater extends LivingCreature{
     }
     eat() {
         if (this.active == false) {
-            var newCell = random(this.chooseCell(1));
+            var newCell = randomInRange(this.chooseCell(1));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -71,11 +71,17 @@ module.exports = class Eater extends LivingCreature{
 
     }
     mul() {
-        var newCell = random(this.chooseCell(0));
+        var newCell = randomInRange(this.chooseCell(0));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = new Eater(newX, newY, 2);
         }
     }
+}
+
+function randomInRange(mas)
+{
+    var i = Math.floor((Math.random() * (mas.length-1)));
+    return mas[i];
 }

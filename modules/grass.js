@@ -17,7 +17,7 @@ module.exports = class Grass extends LivingCreature{
 
     mul() {
         this.multiply++;
-        var newCell = random(this.chooseCell(0));
+        var newCell = randomInRange(this.chooseCell(0));
         if (newCell && this.multiply >= 8) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -26,4 +26,10 @@ module.exports = class Grass extends LivingCreature{
             this.multiply = 0;
         }
     }
+}
+
+function randomInRange(mas)
+{
+    var i = Math.floor((Math.random() * (mas.length-1)));
+    return mas[i];
 }
