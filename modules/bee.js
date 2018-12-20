@@ -25,12 +25,12 @@ module.exports = class Bee extends LivingCreature{
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(num) {
+    chooseCell(num, matrix) {
         this.getNewCoordinates();
-        return super.chooseCell(num);
+        return super.chooseCell(num, matrix);
     }
-    move() {
-        var newCell = random(this.chooseCell(0));
+    move(matrix) {
+        var newCell = random(this.chooseCell(0, matrix));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -45,7 +45,7 @@ module.exports = class Bee extends LivingCreature{
             this.die();
         }
     }
-    die() {
+    die(matrix) {
         for (var i in this.dieDir) {
             var x = this.dieDir[i][0];
             var y = this.dieDir[i][1];

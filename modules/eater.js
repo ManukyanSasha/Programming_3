@@ -19,15 +19,15 @@ module.exports = class Eater extends LivingCreature{
         ];
     }
 
-    chooseCell(num) {
+    chooseCell(num, matrix) {
         this.getNewCoordinates();
-        return super.chooseCell(num);
+        return super.chooseCell(num, matrix);
     }
 
 
-    move() {
+    move(matrix) {
         if (this.active == false) {
-            var newCell = random(this.chooseCell(0));
+            var newCell = random(this.chooseCell(0, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -44,9 +44,9 @@ module.exports = class Eater extends LivingCreature{
             this.active = true;
         }
     }
-    eat() {
+    eat(matrix) {
         if (this.active == false) {
-            var newCell = randomInRange(this.chooseCell(1));
+            var newCell = randomInRange(this.chooseCell(1, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -66,12 +66,12 @@ module.exports = class Eater extends LivingCreature{
             this.active = true;
         }
     }
-    die() {
+    die(matrix) {
         matrix[this.y][this.x] = 0;
 
     }
-    mul() {
-        var newCell = randomInRange(this.chooseCell(0));
+    mul(matrix) {
+        var newCell = randomInRange(this.chooseCell(0, matrix));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];

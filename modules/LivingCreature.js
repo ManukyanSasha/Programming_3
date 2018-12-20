@@ -1,4 +1,3 @@
-var matrix = require("./matrix");
 module.exports = class LivingCreature {
     constructor(x, y, index){
         this.x = x;
@@ -17,7 +16,7 @@ module.exports = class LivingCreature {
        ];
  
     }
-    chooseCell(num) {
+    chooseCell(num, matrix) {
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];

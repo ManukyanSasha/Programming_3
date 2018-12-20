@@ -15,10 +15,10 @@ module.exports = class Flower extends LivingCreature{
         this.energy = 8;
     }
     
-    eat() {
+    eat(matrix) {
         this.energy--;
-        var newCell1 = random(this.chooseCell(2));
-        var newCell2 = random(this.chooseCell(3));
+        var newCell1 = random(this.chooseCell(2, matrix));
+        var newCell2 = random(this.chooseCell(3, matrix));
         var arr = [newCell1, newCell2];
         var newCell = random(arr);
         if (newCell) {
@@ -37,8 +37,8 @@ module.exports = class Flower extends LivingCreature{
             this.mul();
         }
     }
-    mul() {
-        var newCell = random(this.chooseCell(0));
+    mul(matrix) {
+        var newCell = random(this.chooseCell(0, matrix));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -47,7 +47,7 @@ module.exports = class Flower extends LivingCreature{
 
 
     }
-    die() {
+    die(matrix) {
         matrix[this.y][this.x] = 0;
     }
 
