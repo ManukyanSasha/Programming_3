@@ -1,29 +1,31 @@
 var matrix = [];
-
 var side = 10;
 var socket;
 function setup() {
+
     frameRate(0);
     socket = io();
     background('#acacac');
 
-    console.log(matrix);
 
     socket.on("first matrix", function (mtx) {
-      mtx=matrix;
+        matrix = mtx;
+        createCanvas(matrix[0].length * side, matrix.length * side);
+        socket.on("newMatrix", function (mtx) {
+             matrix = mtx;
+             redraw();
+             console.log(matrix);
+         });
     });
-    }
-  
+    
+    noLoop();
+}
 
-       /* socket.on("refresh", function (mtx) {
-            matrix = mtx;
-            redraw();
-        });
-*/
 
-   
 
-    //noLoop();
+
+
+
 
 function draw() {
     background('#acacac')
@@ -36,7 +38,7 @@ function draw() {
             else if (matrix[y][x].index == 2) {
                 fill("yellow");
                 rect(x * side, y * side, side, side);
-                matrix[y][x].active = false;
+            
             }
             else if (matrix[y][x] == 0) {
                 fill("#acacac");
@@ -45,7 +47,6 @@ function draw() {
             else if (matrix[y][x].index == 3) {
                 fill("red");
                 rect(x * side, y * side, side, side);
-                matrix[y][x].active = false;
             }
             else if (matrix[y][x].index == 4) {
                 fill("black");
@@ -59,4 +60,3 @@ function draw() {
     }
 }
 
-console.log(matrix);

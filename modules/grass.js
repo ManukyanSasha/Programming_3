@@ -1,4 +1,5 @@
 var LivingCreature = require("./LivingCreature.js");
+var stat = require("./statistic");
 module.exports = class Grass extends LivingCreature{
 
     chooseCell(num, matrix) {
@@ -24,8 +25,12 @@ module.exports = class Grass extends LivingCreature{
 
             matrix[newY][newX] = new Grass(newX, newY, 1);
             this.multiply = 0;
-        }
+          stat.Grass.born++;
+          stat.Grass.current++;
+        } 
+          
     }
+
 }
 
 function randomInRange(mas)

@@ -1,4 +1,5 @@
 var LivingCreature = require("./LivingCreature.js");
+var stat = require("./statistic");
 module.exports = class Predator extends LivingCreature{
     constructor(x, y, index) {
         super(x,y,index);
@@ -39,7 +40,7 @@ module.exports = class Predator extends LivingCreature{
     }
     move(matrix) {
         if (this.active == false) {
-            var newCell = random(this.chooseCell(0, matrix));
+            var newCell = randomInRange(this.chooseCell(0, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -51,42 +52,55 @@ module.exports = class Predator extends LivingCreature{
             }
             this.energy--;
             if (this.energy <= 0) {
-                this.die();
+                this.die(matrix);
             }
             this.active = true;
         }
     }
     eat(matrix) {
         if (this.active == false) {
-            var newCell = random(this.chooseCell(2, matrix));
+            var newCell = randomInRange(this.chooseCell(2, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
-
                 matrix[newY][newX] = matrix[this.y][this.x];
                 matrix[this.y][this.x] = 0;
                 this.x = newX;
                 this.y = newY;
                 this.energy++;
                 if (this.energy >= 12) {
-                    this.mul();
+                    this.mul(matrix);
                 }
+                stat.Eater.dead ++;
+                stat.Eater.current --;
             }
             else {
-                this.move();
+                this.move(matrix);
             }
             this.active = true;
         }
+        else{this.active = false;}
+
+        
     }
     mul(matrix) {
-        var newCell = random(this.chooseCell(0, matrix));
+        var newCell = randomInRange(this.chooseCell(0, matrix));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = new Eater(newX, newY, 2);
+            matrix[newY][newX] = new Predator(newX, newY, 2);
+            stat.Predator.born ++;
+            stat.Predator.current ++;
         }
     }
     die(matrix) {
         matrix[this.y][this.x] = 0;
+        stat.Predator.die ++;
+        stat.Predator.current --;
     }
+}
+function randomInRange(mas)
+{
+    var i = Math.floor((Math.random() * mas.length));
+    return mas[i];
 }

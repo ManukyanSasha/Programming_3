@@ -1,5 +1,5 @@
 {
-  "name": "programming_3",
+  "name": "Programming_3",
   "version": "1.0.0",
   "description": "simple scaffolds for heroku deployment https://test-heroku-gol.herokuapp.com/",
   "main": "app.js",
