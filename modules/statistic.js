@@ -20,10 +20,9 @@ stat = {
     "dead" : 0,
     "current" :0
 },
-"Flower" : {
-    "born" : 0,
-    "dead" : 0,
-    "current" :0
+"Exanak" : {
+    "Amar" : 0,
+    "Dzmer" : 0
 }
 };
 module.exports = stat;

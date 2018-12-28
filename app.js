@@ -52,6 +52,7 @@ io.on('connection', function (socket) {
                 }
             }
         }
+
         var myjson = JSON.stringify(stat);
         fs.writeFileSync("statistic.json", myjson);
         socket.emit("newMatrix", matrix);

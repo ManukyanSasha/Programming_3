@@ -7,6 +7,7 @@ var stat = require("./statistic");
 var matrix = [];
 var m = 50;
 var n = 50;
+
 for (var y = 0; y < n; y++) {
     matrix[y] = [];
     for (var x = 0; x < m; x++) {
